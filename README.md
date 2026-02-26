@@ -10,7 +10,7 @@ A desktop application for managing patients, doctors, and medical records in a p
 The Russian version is available [here](README.ru.md).
 
 ## Description
-This application was developed as a course project for the "Software Construction" discipline. It allows a polyclinic administrator to view, add, edit, delete, and search for information about patients, doctors, and their medical cards. Data is stored in an XML file, making the system lightweight and easy to deploy.
+This application allows a polyclinic administrator to view, add, edit, delete, and search for information about patients, doctors, and their medical cards. Data is stored in an XML file, making the system lightweight and easy to deploy.
 
 ## Technologies Used
 - **C#** – core programming language
