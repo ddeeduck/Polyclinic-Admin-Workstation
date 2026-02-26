@@ -29,12 +29,19 @@
 ## Скриншоты
 
 *Главное окно*
+
 <img width="600" src="images/main_window.png">
 
+<br>
+
 *Список пациентов*
+
 <img width="600" src="images/patient_list.png">
 
+<br>
+
 *Окно добавления пациента*
+
 <img width="600" src="images/add_patient.png">
 
 ## Пример структуры данных
