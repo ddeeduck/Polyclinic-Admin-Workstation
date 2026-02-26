@@ -29,16 +29,19 @@ This application allows a polyclinic administrator to view, add, edit, delete, a
 ## Screenshots
 
 *Main window*
+
 <img width="600" src="images/main_window.png">
 
 <br>
 
 *Patient list view*
+
 <img width="600" src="images/patient_list.png">
 
 <br>
 
 *Add patient window*
+
 <img width="600" src="images/add_patient.png">
 
 ## Example Data Structure
