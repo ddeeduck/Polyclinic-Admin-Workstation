@@ -1,0 +1,953 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Регистратура" Height="865" Width="1005">
+    <Grid x:Name="MainRoot" Background="#9efaff">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Основной Border -->
+        <Border x:Name="MainBorder" MinWidth="400" Margin="15,0,289,0" Background="#ffffff" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="✕"
+                        Background="#00cad6" 
+                        Foreground="#ebfdfe"
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Top"
+                        Margin="10,10,10,10"
+                        materialDesign:ButtonAssist.CornerRadius="20" 
+                        Click="ExitButton_Click"/>
+                <TextBlock Text="Рабочее место администратора поликлиники" 
+                       Foreground="#0c1716"
+                       FontSize="25" 
+                       FontWeight="Bold" 
+                       Margin="0 0 0 20"></TextBlock>
+                <TextBlock Text="Пациент"
+                       FontWeight="Bold" 
+                       Foreground="#083030"></TextBlock>
+                <Grid Margin="0 0 0 20">
+                    <Button Content="Просмотреть данные"
+                        x:Name="PCheck"
+                        Background="#00cad6" 
+                        Foreground="#ebfdfe"
+                        HorizontalAlignment="Left" 
+                        materialDesign:ButtonAssist.CornerRadius="20" Click="PCheck_Click"/>
+                    <Button Content="Изменить данные"
+                        x:Name="PChange"
+                        Background="#00cad6" 
+                        Foreground="#ebfdfe"
+                        HorizontalAlignment="Left" 
+                        materialDesign:ButtonAssist.CornerRadius="20" Margin="178,0,0,0" Click="PChange_Click"/>
+                    <Button Content="Добавить данные"
+                        x:Name="PAdd"                           
+                        Background="#00cad6" 
+                        Foreground="#ebfdfe"
+                        HorizontalAlignment="Left" 
+                        materialDesign:ButtonAssist.CornerRadius="20" Margin="334,0,0,0" Click="PAdd_Click"/>
+                    <Button Content="Удалить данные"
+                        x:Name="PDelete"                           
+                        Background="#00cad6" 
+                        Foreground="#ebfdfe"
+                        HorizontalAlignment="Left" 
+                        materialDesign:ButtonAssist.CornerRadius="20" Margin="489,0,0,0" Click="PDelete_Click"/>
+                </Grid>
+                <TextBlock Text="Доктор" 
+                       FontWeight="Bold"
+                       Foreground="#083030"></TextBlock>
+                <Grid Margin="0 0 0 20">
+                    <Button Content="Просмотреть данные"
+                        x:Name="DCheck"                            
+                        Background="#00cad6" 
+                        Foreground="#ebfdfe"
+                        HorizontalAlignment="Left" 
+                        materialDesign:ButtonAssist.CornerRadius="20" Height="32" VerticalAlignment="Top"
+                        Click="DCheck_Click"/>
+                    <Button Content="Изменить данные"
+                        x:Name="DChange"                            
+                        Background="#00cad6" 
+                        Foreground="#ebfdfe"
+                        HorizontalAlignment="Left" Click="DChange_Click"
+                        materialDesign:ButtonAssist.CornerRadius="20" Margin="178,0,0,0"/>
+                    <Button Content="Добавить данные"
+                        x:Name="DAdd"                             
+                        Background="#00cad6" 
+                        Foreground="#ebfdfe"
+                        HorizontalAlignment="Left" Click="DAdd_Click"
+                        materialDesign:ButtonAssist.CornerRadius="20" Margin="334,0,0,0"/>
+                    <Button Content="Удалить данные"
+                        x:Name="DeleteDoctor"                             
+                        Background="#00cad6" 
+                        Foreground="#ebfdfe"
+                        HorizontalAlignment="Left" Click="DDelete_Click"
+                        materialDesign:ButtonAssist.CornerRadius="20" Margin="489,0,0,0"/>
+                </Grid>
+                <TextBlock Text="Медицинская карта" 
+                       Foreground="#083030"
+                       FontWeight="Bold"></TextBlock>
+                <Grid Margin="0 0 0 20">
+                    <Button Content="Просмотреть данные"
+                        x:Name="MCheck"                            
+                        Background="#00cad6" 
+                        Foreground="#ebfdfe"
+                        HorizontalAlignment="Left"
+                        Click="MCheck_Click"
+                        materialDesign:ButtonAssist.CornerRadius="20"/>
+                    <Button Content="Изменить данные"
+                        x:Name="MChange"                            
+                        Background="#00cad6" 
+                        Foreground="#ebfdfe"
+                        HorizontalAlignment="Left" 
+                        Click="MChange_Click"
+                        materialDesign:ButtonAssist.CornerRadius="20" Margin="178,0,0,0"/>
+                    <Button Content="Добавить данные"
+                        x:Name="MAdd" 
+                        Background="#00cad6" 
+                        Foreground="#ebfdfe"
+                        HorizontalAlignment="Left"
+                        Click="MAdd_Click"
+                        materialDesign:ButtonAssist.CornerRadius="20" Margin="334,0,0,0"/>
+                    <Button Content="Удалить данные"
+                        x:Name="MDelete"                             
+                        Background="#00cad6" 
+                        Foreground="#ebfdfe"
+                        HorizontalAlignment="Left" 
+                        Click="MDelete_Click"
+                        materialDesign:ButtonAssist.CornerRadius="20" Margin="489,0,0,0"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для просмотра пациентов -->
+        <Border x:Name="PatientCheckBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+            Background="#00cad6" 
+            Foreground="#ebfdfe"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"
+            Margin="10,10,10,10"
+            materialDesign:ButtonAssist.CornerRadius="20" 
+            Click="BackButton_Click"/>
+                <TextBlock Text="Список пациентов" 
+               Foreground="#0c1716"
+               FontSize="25" 
+               FontWeight="Bold" 
+               Margin="0 0 0 20"></TextBlock>
+                <TextBox x:Name="PatientSearchTextBox" 
+                 materialDesign:HintAssist.Hint="Поиск по ФИО" 
+                 Width="200" 
+                 VerticalAlignment="Top" 
+                 Margin="0 0 0 10" 
+                 TextChanged="PatientSearchTextBox_TextChanged"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="300">
+                    <ListView x:Name="PatientListView" SelectionChanged="PatientListView_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding FullName}" Width="200"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для просмотра врачей -->
+        <Border x:Name="DoctorCheckBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+            Background="#00cad6" 
+            Foreground="#ebfdfe"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"
+            Margin="10,10,10,10"
+            materialDesign:ButtonAssist.CornerRadius="20" 
+            Click="BackButton_Click"/>
+                <TextBlock Text="Список врачей" 
+               Foreground="#0c1716"
+               FontSize="25" 
+               FontWeight="Bold" 
+               Margin="0 0 0 20"></TextBlock>
+                <TextBox x:Name="DoctorSearchTextBox" 
+                 materialDesign:HintAssist.Hint="Поиск по ФИО" 
+                 Width="200" 
+                 VerticalAlignment="Top" 
+                 Margin="0 0 0 10" 
+                 TextChanged="DoctorSearchTextBox_TextChanged"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="300">
+                    <ListView x:Name="DoctorListView" SelectionChanged="DoctorListView_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding FullName}" Width="200"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для просмотра медицинских карт -->
+        <Border x:Name="MedicalCardCheckBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+            Background="#00cad6" 
+            Foreground="#ebfdfe"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"
+            Margin="10,10,10,10"
+            materialDesign:ButtonAssist.CornerRadius="20" 
+            Click="BackButton_Click"/>
+                <TextBlock Text="Список медицинских карт" 
+               Foreground="#0c1716"
+               FontSize="25" 
+               FontWeight="Bold" 
+               Margin="0 0 0 20"></TextBlock>
+                <TextBox x:Name="MedicalCardSearchTextBox" 
+                 materialDesign:HintAssist.Hint="Поиск по ФИО" 
+                 Width="200" 
+                 VerticalAlignment="Top" 
+                 Margin="0 0 0 10" 
+                 TextChanged="MedicalCardSearchTextBox_TextChanged"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="300">
+                    <ListView x:Name="MedicalCardListView" SelectionChanged="MedicalCardListView_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding Person.FullName}" Width="200"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для добавления пациента -->
+        <Border x:Name="PatientAddBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+                    Background="#00cad6" 
+                    Foreground="#ebfdfe"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top"
+                    Margin="10,10,10,10"
+                    materialDesign:ButtonAssist.CornerRadius="20" 
+                    Click="BackButton_Click"/>
+                <TextBlock Text="Введите данные пациента" 
+                   Foreground="#0c1716"
+                   FontSize="25" 
+                   FontWeight="Bold" 
+                   Margin="0 0 0 20"></TextBlock>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Имя:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                    <TextBox x:Name="FirstNameTextBox" Grid.Row="0" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Имя"/>
+
+                    <TextBlock Text="Фамилия:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="LastNameTextBox" Grid.Row="1" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Фамилия"/>
+
+                    <TextBlock Text="Отчество:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="MiddleNameTextBox" Grid.Row="2" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Отчество"/>
+
+                    <TextBlock Text="Дата рождения:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <DatePicker x:Name="BirthDatePicker" Grid.Row="3" Grid.Column="1" Width="200"/>
+
+                    <TextBlock Text="Пол:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <ComboBox x:Name="GenderComboBox" Grid.Row="4" Grid.Column="1" Width="200">
+                        <ComboBoxItem Content="Мужской"/>
+                        <ComboBoxItem Content="Женский"/>
+                    </ComboBox>
+
+                    <TextBlock Text="Адрес:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="AddressTextBox" Grid.Row="5" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Адрес"/>
+
+                    <TextBlock Text="Телефон:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="PhoneTextBox" Grid.Row="6" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Телефон"/>
+                </Grid>
+
+                <Button Content="Сохранить" 
+                Width="120" Height="30"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                Margin="5,5,5,5"
+                Click="SavePatientData_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для добавления врача -->
+        <Border x:Name="DoctorAddBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+                    Background="#00cad6" 
+                    Foreground="#ebfdfe"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top"
+                    Margin="10,10,10,10"
+                    materialDesign:ButtonAssist.CornerRadius="20" 
+                    Click="BackButton_Click"/>
+                <TextBlock Text="Введите данные врача" 
+                   Foreground="#0c1716"
+                   FontSize="25" 
+                   FontWeight="Bold" 
+                   Margin="0 0 0 20"></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Имя:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                    <TextBox x:Name="DoctorFirstNameTextBox" Grid.Row="0" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Имя"/>
+
+                    <TextBlock Text="Фамилия:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="DoctorLastNameTextBox" Grid.Row="1" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Фамилия"/>
+
+                    <TextBlock Text="Отчество:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="DoctorMiddleNameTextBox" Grid.Row="2" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Отчество"/>
+
+                    <TextBlock Text="Дата рождения:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <DatePicker x:Name="DoctorBirthDatePicker" Grid.Row="3" Grid.Column="1" Width="200"/>
+
+                    <TextBlock Text="Пол:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <ComboBox x:Name="DoctorGenderComboBox" Grid.Row="4" Grid.Column="1" Width="200">
+                        <ComboBoxItem Content="Мужской"/>
+                        <ComboBoxItem Content="Женский"/>
+                    </ComboBox>
+
+                    <TextBlock Text="Адрес:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="DoctorAddressTextBox" Grid.Row="5" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Адрес"/>
+
+                    <TextBlock Text="Телефон:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="DoctorPhoneTextBox" Grid.Row="6" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Телефон"/>
+
+                    <TextBlock Text="Специализация:" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="DoctorSpecializationTextBox" Grid.Row="7" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Специализация"/>
+
+                    <TextBlock Text="Опыт работы (лет):" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="DoctorExperienceTextBox" Grid.Row="8" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Опыт работы"/>
+
+                    <TextBlock Text="Номер кабинета:" Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="DoctorRoomNumberTextBox" Grid.Row="9" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Номер кабинета"/>
+                </Grid>
+
+                <Button Content="Сохранить" 
+                Width="120" Height="30"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                Margin="5,5,5,5"
+                Click="SaveDoctorData_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для добавления медицинской карты -->
+        <Border x:Name="MedicalCardAddBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Margin="10,10,10,10"
+                materialDesign:ButtonAssist.CornerRadius="20" 
+                Click="BackButton_Click"/>
+                <TextBlock Text="Введите данные медицинской карты" 
+                   Foreground="#0c1716"
+                   FontSize="25" 
+                   FontWeight="Bold" 
+                   Margin="0 0 0 20"></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Имя:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                    <TextBox x:Name="MedicalCardFirstNameTextBox" Grid.Row="0" Grid.Column="0" Width="200" materialDesign:HintAssist.Hint="Имя"/>
+
+                    <TextBlock Text="Фамилия:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="MedicalCardLastNameTextBox" Grid.Row="1" Grid.Column="0" Width="200" materialDesign:HintAssist.Hint="Фамилия"/>
+
+                    <TextBlock Text="Отчество:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="MedicalCardMiddleNameTextBox" Grid.Row="2" Grid.Column="0" Width="200" materialDesign:HintAssist.Hint="Отчество"/>
+
+                    <TextBlock Text="Дата рождения:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <DatePicker x:Name="MedicalCardBirthDatePicker" Grid.Row="3" Grid.Column="0" Width="200"/>
+
+                    <TextBlock Text="Пол:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <ComboBox x:Name="MedicalCardGenderComboBox" Grid.Row="4" Grid.Column="0" Width="200">
+                        <ComboBoxItem Content="Мужской"/>
+                        <ComboBoxItem Content="Женский"/>
+                    </ComboBox>
+
+                    <TextBlock Text="Адрес:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="MedicalCardAddressTextBox" Grid.Row="5" Grid.Column="0" Width="200" materialDesign:HintAssist.Hint="Адрес"/>
+
+                    <TextBlock Text="Телефон:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="MedicalCardPhoneTextBox" Grid.Row="6" Grid.Column="0" Width="200" materialDesign:HintAssist.Hint="Телефон"/>
+
+                    <TextBlock Text="Дата начала болезни:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                    <DatePicker x:Name="MedicalCardStartDatePicker" Grid.Row="0" Grid.Column="1" Width="200"/>
+
+                    <TextBlock Text="Дата окончания болезни:" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <DatePicker x:Name="MedicalCardEndDatePicker" Grid.Row="1" Grid.Column="1" Width="200"/>
+
+                    <TextBlock Text="Анамнез:" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Margin="0 10 10 0"/>
+                    <TextBox x:Name="MedicalCardAnamnesisTextBox" Grid.Row="2" Grid.Column="1" Width="200" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Анамнез"/>
+                </Grid>
+
+                <Button Content="Сохранить" 
+                Width="120" Height="30"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                Margin="5,5,5,5"
+                Click="SaveMedicalCardData_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для удаления пациентов -->
+        <Border x:Name="PatientDeleteBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Margin="10,10,10,10"
+                materialDesign:ButtonAssist.CornerRadius="20" 
+                Click="BackButton_Click"/>
+                <TextBlock Text="Список пациентов" 
+                   Foreground="#0c1716"
+                   FontSize="25" 
+                   FontWeight="Bold" 
+                   Margin="0 0 0 20"></TextBlock>
+                <TextBox x:Name="PatientSearchDeleteTextBox" 
+                 materialDesign:HintAssist.Hint="Поиск по ФИО" 
+                 Width="200" 
+                 VerticalAlignment="Top" 
+                 Margin="0 0 0 10" 
+                 TextChanged="PatientSearchDeleteTextBox_TextChanged"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="300">
+                    <ListView x:Name="PatientDeleteListView" SelectionChanged="PatientListView_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding FullName}" Width="200"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+                <Button Content="Удалить пациента" 
+                Background="#FF4C4C" 
+                Foreground="White" 
+                Margin="0 20 0 0" 
+                Click="DeletePatientButton_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для удаления врачей -->
+        <Border x:Name="DoctorDeleteBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Margin="10,10,10,10"
+                materialDesign:ButtonAssist.CornerRadius="20" 
+                Click="BackButton_Click"/>
+                <TextBlock Text="Список врачей" 
+                   Foreground="#0c1716"
+                   FontSize="25" 
+                   FontWeight="Bold" 
+                   Margin="0 0 0 20"></TextBlock>
+                <TextBox x:Name="DoctorSearchDeleteTextBox" 
+                 materialDesign:HintAssist.Hint="Поиск по ФИО" 
+                 Width="200" 
+                 VerticalAlignment="Top" 
+                 Margin="0 0 0 10" 
+                 TextChanged="DoctorSearchDeleteTextBox_TextChanged"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="300">
+                    <ListView x:Name="DoctorDeleteListView" SelectionChanged="DoctorListView_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding FullName}" Width="200"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+                <Button Content="Удалить врача" 
+                Background="#FF4C4C" 
+                Foreground="White" 
+                Margin="0 20 0 0" 
+                Click="DeleteDoctorButton_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для удаления медицинских карт -->
+        <Border x:Name="MedicalCardDeleteBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Margin="10,10,10,10"
+                materialDesign:ButtonAssist.CornerRadius="20" 
+                Click="BackButton_Click"/>
+                <TextBlock Text="Список медицинских карт" 
+                   Foreground="#0c1716"
+                   FontSize="25" 
+                   FontWeight="Bold" 
+                   Margin="0 0 0 20"></TextBlock>
+                <TextBox x:Name="MedicalCardDeleteSearchTextBox" 
+                 materialDesign:HintAssist.Hint="Поиск по ФИО" 
+                 Width="200" 
+                 VerticalAlignment="Top" 
+                 Margin="0 0 0 10" 
+                 TextChanged="MedicalCardDeleteSearchTextBox_TextChanged"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="300">
+                    <ListView x:Name="MedicalCardDeleteListView" SelectionChanged="MedicalCardListView_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding Person.FullName}" Width="200"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+                <Button Content="Удалить медицинскую карту" 
+                Background="#FF4C4C" 
+                Foreground="White" 
+                Margin="0 20 0 0" 
+                Click="DeleteMedicalCardButton_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для выбора пациента для изменения -->
+        <Border x:Name="PatientSelectForChangeBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Margin="10,10,10,10"
+                materialDesign:ButtonAssist.CornerRadius="20" 
+                Click="BackButton_Click"/>
+                <TextBlock Text="Выберите пациента для изменения" 
+                   Foreground="#0c1716"
+                   FontSize="25" 
+                   FontWeight="Bold" 
+                   Margin="0 0 0 20"></TextBlock>
+                <TextBox x:Name="PatientSearchForChangeTextBox" 
+                 materialDesign:HintAssist.Hint="Поиск по ФИО" 
+                 Width="200" 
+                 VerticalAlignment="Top" 
+                 Margin="0 0 0 10" 
+                 TextChanged="PatientSearchForChangeTextBox_TextChanged"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="300">
+                    <ListView x:Name="PatientChangeListView" SelectionChanged="PatientChangeListView_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding FullName}" Width="200"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+                <Button Content="Выбрать для изменения" 
+                Background="#00cad6" 
+                Foreground="#ebfdfe" 
+                Margin="0 20 0 0" 
+                Click="SelectPatientForChange_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для изменения данных пациента -->
+        <Border x:Name="PatientChangeBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Margin="10,10,10,10"
+                materialDesign:ButtonAssist.CornerRadius="20" 
+                Click="BackButton_Click"/>
+                <TextBlock Text="Изменение данных пациента" 
+                   Foreground="#0c1716"
+                   FontSize="25" 
+                   FontWeight="Bold" 
+                   Margin="0 0 0 20"></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Имя:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                    <TextBox x:Name="ChangePatientFirstNameTextBox" Grid.Row="0" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Имя"/>
+
+                    <TextBlock Text="Фамилия:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangePatientLastNameTextBox" Grid.Row="1" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Фамилия"/>
+
+                    <TextBlock Text="Отчество:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangePatientMiddleNameTextBox" Grid.Row="2" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Отчество"/>
+
+                    <TextBlock Text="Дата рождения:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <DatePicker x:Name="ChangePatientBirthDatePicker" Grid.Row="3" Grid.Column="1" Width="200"/>
+
+                    <TextBlock Text="Пол:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <ComboBox x:Name="ChangePatientGenderComboBox" Grid.Row="4" Grid.Column="1" Width="200">
+                        <ComboBoxItem Content="Мужской"/>
+                        <ComboBoxItem Content="Женский"/>
+                    </ComboBox>
+
+                    <TextBlock Text="Адрес:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangePatientAddressTextBox" Grid.Row="5" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Адрес"/>
+
+                    <TextBlock Text="Телефон:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangePatientPhoneTextBox" Grid.Row="6" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Телефон"/>
+                </Grid>
+                <Button Content="Сохранить изменения" 
+                Width="150" Height="30"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                Margin="5,5,5,5"
+                Click="SavePatientChanges_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для выбора врача для изменения -->
+        <Border x:Name="DoctorSelectForChangeBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Margin="10,10,10,10"
+                materialDesign:ButtonAssist.CornerRadius="20" 
+                Click="BackButton_Click"/>
+                <TextBlock Text="Выберите врача для изменения" 
+                   Foreground="#0c1716"
+                   FontSize="25" 
+                   FontWeight="Bold" 
+                   Margin="0 0 0 20"></TextBlock>
+                <TextBox x:Name="DoctorSearchForChangeTextBox" 
+                 materialDesign:HintAssist.Hint="Поиск по ФИО" 
+                 Width="200" 
+                 VerticalAlignment="Top" 
+                 Margin="0 0 0 10" 
+                 TextChanged="DoctorSearchForChangeTextBox_TextChanged"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="300">
+                    <ListView x:Name="DoctorChangeListView" SelectionChanged="DoctorChangeListView_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding FullName}" Width="200"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+                <Button Content="Выбрать для изменения" 
+                Background="#00cad6" 
+                Foreground="#ebfdfe" 
+                Margin="0 20 0 0" 
+                Click="SelectDoctorForChange_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для изменения данных врача -->
+        <Border x:Name="DoctorChangeBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Margin="10,10,10,10"
+                materialDesign:ButtonAssist.CornerRadius="20" 
+                Click="BackButton_Click"/>
+                <TextBlock Text="Изменение данных врача" 
+                   Foreground="#0c1716"
+                   FontSize="25" 
+                   FontWeight="Bold" 
+                   Margin="0 0 0 20"></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Имя:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                    <TextBox x:Name="ChangeDoctorFirstNameTextBox" Grid.Row="0" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Имя"/>
+
+                    <TextBlock Text="Фамилия:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangeDoctorLastNameTextBox" Grid.Row="1" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Фамилия"/>
+
+                    <TextBlock Text="Отчество:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangeDoctorMiddleNameTextBox" Grid.Row="2" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Отчество"/>
+
+                    <TextBlock Text="Дата рождения:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <DatePicker x:Name="ChangeDoctorBirthDatePicker" Grid.Row="3" Grid.Column="1" Width="200"/>
+
+                    <TextBlock Text="Пол:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <ComboBox x:Name="ChangeDoctorGenderComboBox" Grid.Row="4" Grid.Column="1" Width="200">
+                        <ComboBoxItem Content="Мужской"/>
+                        <ComboBoxItem Content="Женский"/>
+                    </ComboBox>
+
+                    <TextBlock Text="Адрес:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangeDoctorAddressTextBox" Grid.Row="5" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Адрес"/>
+
+                    <TextBlock Text="Телефон:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangeDoctorPhoneTextBox" Grid.Row="6" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Телефон"/>
+
+                    <TextBlock Text="Специализация:" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangeDoctorSpecializationTextBox" Grid.Row="7" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Специализация"/>
+
+                    <TextBlock Text="Опыт работы (лет):" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangeDoctorExperienceTextBox" Grid.Row="8" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Опыт работы"/>
+
+                    <TextBlock Text="Номер кабинета:" Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangeDoctorRoomNumberTextBox" Grid.Row="9" Grid.Column="1" Width="200" materialDesign:HintAssist.Hint="Номер кабинета"/>
+                </Grid>
+                <Button Content="Сохранить изменения" 
+                Width="150" Height="30"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                Margin="5,5,5,5"
+                Click="SaveDoctorChanges_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для выбора медицинской карты для изменения -->
+        <Border x:Name="MedicalCardSelectForChangeBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Margin="10,10,10,10"
+                materialDesign:ButtonAssist.CornerRadius="20" 
+                Click="BackButton_Click"/>
+                <TextBlock Text="Выберите медицинскую карту для изменения" 
+                   Foreground="#0c1716"
+                   FontSize="25" 
+                   FontWeight="Bold" 
+                   Margin="0 0 0 20"></TextBlock>
+                <TextBox x:Name="MedicalCardSearchForChangeTextBox" 
+                 materialDesign:HintAssist.Hint="Поиск по ФИО" 
+                 Width="200" 
+                 VerticalAlignment="Top" 
+                 Margin="0 0 0 10" 
+                 TextChanged="MedicalCardSearchForChangeTextBox_TextChanged"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="300">
+                    <ListView x:Name="MedicalCardChangeListView" SelectionChanged="MedicalCardChangeListView_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding Person.FullName}" Width="200"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+                <Button Content="Выбрать для изменения" 
+                Background="#00cad6" 
+                Foreground="#ebfdfe" 
+                Margin="0 20 0 0" 
+                Click="SelectMedicalCardForChange_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Border для изменения данных медицинской карты -->
+        <Border x:Name="MedicalCardChangeBorder" MinWidth="400" Margin="15,0,289,0" Background="#f0f0f0" VerticalAlignment="Center" Padding="30" MaxWidth="800" CornerRadius="20" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#144043" ShadowDepth="5" />
+            </Border.Effect>
+            <StackPanel>
+                <Button Content="↩"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Margin="10,10,10,10"
+                materialDesign:ButtonAssist.CornerRadius="20" 
+                Click="BackButton_Click"/>
+                <TextBlock Text="Изменение данных медицинской карты" 
+                   Foreground="#0c1716"
+                   FontSize="25" 
+                   FontWeight="Bold" 
+                   Margin="0 0 0 20"></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Имя:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                    <TextBox x:Name="ChangeMedicalCardFirstNameTextBox" Grid.Row="0" Grid.Column="0" Width="200" materialDesign:HintAssist.Hint="Имя"/>
+
+                    <TextBlock Text="Фамилия:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangeMedicalCardLastNameTextBox" Grid.Row="1" Grid.Column="0" Width="200" materialDesign:HintAssist.Hint="Фамилия"/>
+
+                    <TextBlock Text="Отчество:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangeMedicalCardMiddleNameTextBox" Grid.Row="2" Grid.Column="0" Width="200" materialDesign:HintAssist.Hint="Отчество"/>
+
+                    <TextBlock Text="Дата рождения:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <DatePicker x:Name="ChangeMedicalCardBirthDatePicker" Grid.Row="3" Grid.Column="0" Width="200"/>
+
+                    <TextBlock Text="Пол:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <ComboBox x:Name="ChangeMedicalCardGenderComboBox" Grid.Row="4" Grid.Column="0" Width="200">
+                        <ComboBoxItem Content="Мужской"/>
+                        <ComboBoxItem Content="Женский"/>
+                    </ComboBox>
+
+                    <TextBlock Text="Адрес:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangeMedicalCardAddressTextBox" Grid.Row="5" Grid.Column="0" Width="200" materialDesign:HintAssist.Hint="Адрес"/>
+
+                    <TextBlock Text="Телефон:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangeMedicalCardPhoneTextBox" Grid.Row="6" Grid.Column="0" Width="200" materialDesign:HintAssist.Hint="Телефон"/>
+
+                    <TextBlock Text="Дата начала болезни:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                    <DatePicker x:Name="ChangeMedicalCardStartDatePicker" Grid.Row="0" Grid.Column="1" Width="200"/>
+
+                    <TextBlock Text="Дата окончания болезни:" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0 10 10 0"/>
+                    <DatePicker x:Name="ChangeMedicalCardEndDatePicker" Grid.Row="1" Grid.Column="1" Width="200"/>
+
+                    <TextBlock Text="Анамнез:" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Margin="0 10 10 0"/>
+                    <TextBox x:Name="ChangeMedicalCardAnamnesisTextBox" Grid.Row="2" Grid.Column="1" Width="200" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Анамнез"/>
+                </Grid>
+                <Button Content="Сохранить изменения" 
+                Width="150" Height="30"
+                Background="#00cad6" 
+                Foreground="#ebfdfe"
+                VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                Margin="5,5,5,5"
+                Click="SaveMedicalCardChanges_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
