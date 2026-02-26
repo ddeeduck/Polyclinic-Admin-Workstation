@@ -47,33 +47,19 @@ This application was developed as a course project for the "Software Constructio
 xml
 
 <Hospital>
-
   <Peoples>
-    
     <Person Id="...">
-    
       <Surname>Ivanov</Surname>
-      
       <Name>Ivan</Name>
-      
       <Patronymic>Ivanovich</Patronymic>
-      
       <DateBirthday>1980-05-15</DateBirthday>
-      
       <Gender>Male</Gender>
-      
       <Address>123 Main St</Address>
-      
       <Number>+1234567890</Number>
-      
     </Person>
-    
   </Peoples>
-  
   <Doctors>...</Doctors>
-  
   <MedCards>...</MedCards>
-  
 </Hospital>
 
 ```
